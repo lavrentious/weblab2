@@ -2,13 +2,13 @@ package ru.lavrent.weblab2.models;
 
 public class Record {
   private final long createdAt;
-  private final int x;
-  private final int y;
+  private final float x;
+  private final float y;
   private final float r;
   private final boolean isHit;
   private final long scriptTime;
 
-  public Record(int x, int y, float r, long scriptTime) {
+  public Record(float x, float y, float r, long scriptTime) {
     this.createdAt = System.currentTimeMillis();
     this.x = x;
     this.y = y;
@@ -17,7 +17,7 @@ public class Record {
     this.scriptTime = scriptTime;
   }
 
-  public static boolean checkHit(int x, int y, float r) {
+  public static boolean checkHit(float x, float y, float r) {
     if (x >= 0 && y <= 0) {
       return Math.pow(x, 2) + Math.pow(y, 2) <= Math.pow(r / 2, 2);
     }
@@ -34,11 +34,11 @@ public class Record {
     return r;
   }
 
-  public int getX() {
+  public float getX() {
     return x;
   }
 
-  public int getY() {
+  public float getY() {
     return y;
   }
 

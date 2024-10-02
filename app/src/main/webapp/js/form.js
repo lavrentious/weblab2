@@ -17,13 +17,21 @@ export default {
       !isNaN(parseInt(+value, 10))
     );
   },
+  isFloat(value) {
+    return (
+      value !== "" &&
+      !isNaN(+value) &&
+      parseFloat(Number(+value)) == +value &&
+      !isNaN(parseFloat(+value, 10))
+    );
+  },
   checkX() {
     const x = this.xInput.value;
-    return this.isInt(x) && -3 <= x && x <= 3;
+    return this.isFloat(x) && -3 <= x && x <= 3;
   },
   checkY() {
     const y = this.yInput.value;
-    return this.isInt(y) && -5 <= y && y <= 5;
+    return this.isFloat(y) && -5 <= y && y <= 5;
   },
   checkR() {
     const r = this.getR();

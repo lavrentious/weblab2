@@ -22,8 +22,8 @@ public class AreaCheckServlet extends HttpServlet {
 
   private void processRequest(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    int x = Integer.parseInt(request.getParameter("x"));
-    int y = Integer.parseInt(request.getParameter("y"));
+    float x = Float.parseFloat(request.getParameter("x"));
+    float y = Float.parseFloat(request.getParameter("y"));
     float r = Float.parseFloat(request.getParameter("r"));
 
     Record record = new Record(x, y, r, 500); // TODO: script time

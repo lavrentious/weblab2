@@ -34,8 +34,8 @@ public class ControllerServlet extends HttpServlet {
             paramName);
       }
 
-      int x = Validator.toInt(request.getParameter("x"), "x");
-      int y = Validator.toInt(request.getParameter("y"), "y");
+      float x = Validator.toFloat(request.getParameter("x"), "x");
+      float y = Validator.toFloat(request.getParameter("y"), "y");
       float r = Validator.toFloat(request.getParameter("r"), "r");
       Validator.validate(x, y, r);
 

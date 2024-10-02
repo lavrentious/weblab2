@@ -11,7 +11,7 @@ import ru.lavrent.weblab2.exceptions.ValidationException;
 public class Validator {
   public static final Set<Float> rValues = new HashSet<>(Arrays.asList(1f, 1.5f, 2f, 2.5f, 3f));
 
-  public static void validate(int x, int y, float r) {
+  public static void validate(float x, float y, float r) {
     if (!(-3 <= x && x <= 3)) {
       throw new ValidationException("x must be between -3 and 3");
     }
