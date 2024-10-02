@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="ru.lavrent.weblab2.models.Record" %>
 <%@ page import="ru.lavrent.weblab2.models.RecordBean" %>
+<%@ page import="com.google.gson.Gson" %>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
@@ -26,11 +27,11 @@
   </header>
 
   <div class="container">
-    <h1>LabWork1</h1>
+    <h1>LabWork2</h1>
     <div style="display: flex; flex-wrap: wrap">
       <div class="p-1 m-1" style="flex-grow: 1">
         <h2>График</h2>
-        <img src="assets/graph.png" style="background-color: white; margin: 2rem" />
+        <canvas id="canvas" class="outlined" width="400" height="400"></canvas>
 
         <hr />
 
@@ -93,6 +94,13 @@
       </div>
     </div>
   </div>
+
+  <% if (bean != null) { %>
+    <pre id="recordsHistroyJSON" style="display: none;">
+    <% Gson gson = new Gson(); %>
+    <%= gson.toJson(bean.getRecords()) %>
+    </pre>
+  <% } %>
 
   <script type="module" src="js/main.js"></script>
 </body>
