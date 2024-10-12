@@ -7,7 +7,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import ru.lavrent.weblab2.models.RecordBean;
 import ru.lavrent.weblab2.models.Record;
 
@@ -28,12 +27,7 @@ public class AreaCheckServlet extends HttpServlet {
 
     Record record = new Record(x, y, r, 500); // TODO: script time
 
-    HttpSession session = request.getSession();
-    RecordBean recordBean = (RecordBean) session.getAttribute("recordBean");
-    if (recordBean == null) {
-      recordBean = new RecordBean();
-      session.setAttribute("recordBean", recordBean);
-    }
+    RecordBean recordBean = HistoryServlet.getBean(request);
     recordBean.addRecord(record);
 
     request.setAttribute("record", record);

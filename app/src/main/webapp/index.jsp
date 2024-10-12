@@ -96,13 +96,6 @@
     </div>
   </div>
 
-  <% if (bean != null) { %>
-    <pre id="recordsHistroyJSON" style="display: none;">
-    <% Gson gson = new Gson(); %>
-    <%= gson.toJson(bean.getRecords()) %>
-    </pre>
-  <% } %>
-
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   <script type="module" src="js/main.js"></script>
 </body>

@@ -17,4 +17,8 @@ public class RecordBean {
   public List<Record> getRecords() {
     return records;
   }
+
+  public void clear() {
+    records.clear();
+  }
 }
