@@ -1,28 +1,30 @@
 const R_VALUES = [1, 1.5, 2, 2.5, 3];
 
 export default {
-  xInput: document.getElementById("xInput"),
-  yInput: document.getElementById("yInput"),
-  formRFieldset: document.getElementById("formRFieldset"),
-  setSubmitActive(isActive) {
+  xInput: document.getElementById("xInput") as HTMLInputElement,
+  yInput: document.getElementById("yInput") as HTMLInputElement,
+  formRFieldset: document.getElementById(
+    "formRFieldset"
+  ) as HTMLFieldSetElement,
+  setSubmitActive(isActive: boolean) {
     if (isActive)
       document.getElementById("submitButton").removeAttribute("disabled");
     else document.getElementById("submitButton").setAttribute("disabled", "");
   },
-  isInt(value) {
+  isInt(value: string) {
     return (
       value !== "" &&
       !isNaN(+value) &&
-      parseInt(Number(+value)) == +value &&
-      !isNaN(parseInt(+value, 10))
+      parseInt(Number(+value).toString()) == +value &&
+      !isNaN(parseInt(value, 10))
     );
   },
-  isFloat(value) {
+  isFloat(value: string) {
     return (
       value !== "" &&
       !isNaN(+value) &&
-      parseFloat(Number(+value)) == +value &&
-      !isNaN(parseFloat(+value, 10))
+      parseFloat(Number(+value).toString()) == +value &&
+      !isNaN(parseFloat(value))
     );
   },
   checkX() {
@@ -62,7 +64,10 @@ export default {
     return isValid;
   },
   getR() {
-    return document.querySelector('input[name="r"]:checked')?.value || null;
+    return (
+      (document.querySelector('input[name="r"]:checked') as HTMLInputElement)
+        ?.value || null
+    );
   },
   resetX() {
     this.xInput.classList.remove("valid");
@@ -87,17 +92,17 @@ export default {
         r: this.getR(),
       };
   },
-  init(onSubmit) {
+  init(onSubmit?: () => void) {
     R_VALUES.forEach((value, i) => {
       const label = document.createElement("label");
       const input = document.createElement("input");
       input.type = "radio";
       input.name = "r";
-      input.value = value;
+      input.value = value.toString();
 
       label.appendChild(input);
-      label.appendChild(document.createTextNode(value));
-      formRFieldset.appendChild(label);
+      label.appendChild(document.createTextNode(value.toString()));
+      this.formRFieldset.appendChild(label);
     });
 
     this.xInput.addEventListener("focus", () => {
@@ -115,23 +120,13 @@ export default {
     this.formRFieldset.addEventListener("change", () => {
       this.validateR();
     });
-
-    // const form = document.getElementById("form");
-    // form.addEventListener("submit", (event) => {
-    //   event.preventDefault();
-
-    //   const formData = this.getFormData();
-    //   console.log(formData);
-    //   if (!formData) return;
-    //   onSubmit(formData, this);
-    // });
   },
   resetForm() {
     this.xInput.value = "";
     this.yInput.value = "";
-    Array.from(
-      document.querySelectorAll('input[name="r"]:checked')
-    ).forEach((input) => (input.checked = false));
+    document
+      .querySelectorAll('input[name="r"]:checked')
+      .forEach((input: HTMLInputElement) => (input.checked = false));
     this.resetX();
     this.resetY();
     this.resetR();

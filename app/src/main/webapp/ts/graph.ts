@@ -1,14 +1,15 @@
-import formService from "./form.js";
+import formService from "./form";
+import Toastify from "toastify-js";
 
 const D = 100;
 
 export default {
-  ctx: null,
+  ctx: null as CanvasRenderingContext2D | null,
   getR() {
     return formService.getR();
   },
-  init(submitFn) {
-    const canvas = document.getElementById("canvas");
+  init(submitFn: (x: number, y: number, r: number) => void) {
+    const canvas = document.getElementById("canvas") as HTMLCanvasElement;
     const ctx = canvas.getContext("2d");
     this.ctx = ctx;
 
@@ -86,7 +87,7 @@ export default {
 
     drawShape();
   },
-  addPoint(x, y, r, color) {
+  addPoint(x: number, y: number, r: number, color: string) {
     const ctx = this.ctx;
     ctx.fillStyle = color;
     ctx.beginPath();

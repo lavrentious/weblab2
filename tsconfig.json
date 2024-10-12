@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "outDir": "app/src/main/webapp/js",
+    "rootDir": "app/src/main/webapp/ts",
+    "esModuleInterop": true
+  },
+  "include": ["app/src/main/webapp/ts/**/*.ts"]
+}

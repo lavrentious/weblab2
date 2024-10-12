@@ -96,8 +96,8 @@
     </div>
   </div>
 
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-  <script type="module" src="js/main.js"></script>
+  <!-- <script>var exports = {};</script> -->
+  <script type="module" src="js/bundle.js"></script>
 </body>
 
 </html>

@@ -1,6 +1,6 @@
-import form from "./form.js";
-import graph from "./graph.js";
-import history from "./history.js";
+import form from "./form";
+import graph from "./graph";
+import history from "./history";
 
 function onInit() {
   form.init(() => {});

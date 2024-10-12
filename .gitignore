@@ -33,3 +33,6 @@ output.json
 #NDK
 obj/
 .externalNativeBuild
+
+app/src/main/webapp/js/
+node_modules/
