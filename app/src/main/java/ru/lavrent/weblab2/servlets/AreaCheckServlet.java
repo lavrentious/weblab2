@@ -7,7 +7,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import ru.lavrent.weblab2.models.RecordBean;
 import ru.lavrent.weblab2.models.Record;
 
 @WebServlet(urlPatterns = "/check-area", loadOnStartup = 1)
@@ -27,8 +26,7 @@ public class AreaCheckServlet extends HttpServlet {
 
     Record record = new Record(x, y, r, 500); // TODO: script time
 
-    RecordBean recordBean = HistoryServlet.getBean(request);
-    recordBean.addRecord(record);
+    HistoryServlet.addRecord(request, record);
 
     request.setAttribute("record", record);
     request.getRequestDispatcher("/result.jsp").forward(request, response);
