@@ -6,6 +6,10 @@ import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.io.IOException;
+import com.google.gson.Gson;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 public class HTTPUtils {
   public static Map<String, String> parseQueryParamsString(String query) {
@@ -45,5 +49,17 @@ public class HTTPUtils {
     } catch (NumberFormatException e) {
       throw new ValidationException("key %s is not a float: %s".formatted(key, value));
     }
+  }
+
+  public static void sendError(HttpServletResponse response, String message) throws IOException {
+    Gson gson = new Gson();
+    Map<String, Object> jsonResponse = new HashMap<>() {
+      {
+        put("message", message);
+      }
+    };
+    response.setContentType("application/json");
+    response.getWriter().write(gson.toJson(jsonResponse));
+    response.setStatus(400);
   }
 }
