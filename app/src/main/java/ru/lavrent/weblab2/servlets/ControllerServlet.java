@@ -22,6 +22,7 @@ public class ControllerServlet extends HttpServlet {
 
   private void processRequest(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+    request.setAttribute("startTimeMs", System.currentTimeMillis());
     // for X, Y, R check present and not empty
     try {
       for (String paramName : new String[] { "x", "y", "r" }) {

@@ -31,7 +31,8 @@ public class AreaCheckServlet extends HttpServlet {
     float y = Float.parseFloat(request.getParameter("y"));
     float r = Float.parseFloat(request.getParameter("r"));
 
-    Record record = new Record(x, y, r, 500); // TODO: script time
+    Long startTimeMs = (Long) request.getAttribute("startTimeMs");
+    Record record = new Record(x, y, r, startTimeMs != null ? System.currentTimeMillis() - startTimeMs : -1);
 
     HistoryServlet.addRecord(request, record);
 
