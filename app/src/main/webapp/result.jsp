@@ -36,8 +36,14 @@
     <% } else { %>
       <p>no record???</p>
     <% } %>
+    
+    <a href="index.jsp">back</a>
 
-      <a href="index.jsp">back</a>
+    <% if (record.isHit()) { %>
+      <img src="https://steamuserimages-a.akamaihd.net/ugc/5072773634787328458/CF4C94259BB7B3C5107F39F03C32B4F88EC091DB/?imw=512&amp;imh=523&amp;ima=fit&amp;impolicy=Letterbox&amp;imcolor=%23000000&amp;letterbox=true" />
+    <% } else { %>
+      <img src="https://thumbs.dreamstime.com/b/angry-man-showing-thumb-down-gesture-as-rejection-symbol-dislike-african-american-grimacing-white-studio-background-130155704.jpg" />
+    <% } %>
   </body>
 
 </html>
