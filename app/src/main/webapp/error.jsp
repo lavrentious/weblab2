@@ -30,7 +30,8 @@
     <img style="width: 100%;" src="https://familypolicyalliance.com/wp-content/uploads/2021/08/Policeman-blowing-whistle-iStock-w.jpg" />
     <h3 style="color: red; text-shadow: 2px 2px 3px #bbb;">
       ${error}
-    </pre>
+    </h3>
+    <a href="index.jsp">back</a>
   </div>
 </body>
 
