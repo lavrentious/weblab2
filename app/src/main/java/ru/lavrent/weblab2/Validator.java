@@ -13,10 +13,10 @@ public class Validator {
 
   public static void validate(float x, float y, float r) {
     if (!(-3 <= x && x <= 3)) {
-      throw new ValidationException("x must be between -3 and 3");
+      throw new ValidationException("x must be between -3 and 3: %f".formatted(x));
     }
     if (!(-5 <= y && y <= 5)) {
-      throw new ValidationException("y must be between -5 and 5");
+      throw new ValidationException("y must be between -5 and 5: %f".formatted(y));
     }
     if (!rValues.contains(r)) {
       throw new ValidationException(
