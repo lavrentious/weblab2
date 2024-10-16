@@ -41,7 +41,7 @@ public class ControllerServlet extends HttpServlet {
       RequestDispatcher dispatcher = request.getRequestDispatcher("/check-area");
       dispatcher.forward(request, response);
     } catch (ValidationException e) {
-      HTTPUtils.sendError(response, e.getMessage());
+      HTTPUtils.sendErrorHtml(request, response, e.getMessage());
       return;
     }
   }

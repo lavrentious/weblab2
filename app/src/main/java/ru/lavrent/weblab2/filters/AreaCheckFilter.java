@@ -10,6 +10,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebFilter;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import ru.lavrent.weblab2.HTTPUtils;
 
@@ -26,7 +27,8 @@ public class AreaCheckFilter implements Filter {
       throws IOException, ServletException {
     Boolean isValid = (Boolean) request.getAttribute("valid");
     if (isValid == null || !isValid) {
-      HTTPUtils.sendError((HttpServletResponse) response, "request was not validated - use ./controller instead");
+      HTTPUtils.sendErrorHtml((HttpServletRequest) request, (HttpServletResponse) response,
+          "request was not validated - use ./controller instead");
       return;
     }
     chain.doFilter(request, response);

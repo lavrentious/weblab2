@@ -1,14 +1,15 @@
 package ru.lavrent.weblab2;
 
 import ru.lavrent.weblab2.exceptions.ValidationException;
-
+import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-import java.io.IOException;
 import com.google.gson.Gson;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class HTTPUtils {
@@ -60,6 +61,13 @@ public class HTTPUtils {
     };
     response.setContentType("application/json");
     response.getWriter().write(gson.toJson(jsonResponse));
-    response.setStatus(400);
+    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+  }
+
+  public static void sendErrorHtml(HttpServletRequest request, HttpServletResponse response, String message)
+      throws ServletException, IOException {
+    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+    request.setAttribute("error", message);
+    request.getRequestDispatcher("/error.jsp").forward(request, response);
   }
 }
