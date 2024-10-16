@@ -3,6 +3,9 @@
 <%@ page import="ru.lavrent.weblab2.models.RecordBean" %>
 <%@ page import="com.google.gson.Gson" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+
 <jsp:useBean id="recordBean" class="ru.lavrent.weblab2.models.RecordBean" scope="session" />
 <!DOCTYPE html>
 <html>
@@ -77,7 +80,7 @@
             <% if (recordBean != null && !recordBean.getRecords().isEmpty()) { %>
               <% for (Record record : recordBean.getRecords()) { %>
               <tr>
-                  <td><%= record.getCreatedAt() %></td>
+                  <td><%= new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date(record.getCreatedAt())) %></td>
                   <td><%= record.getX() %></td>
                   <td><%= record.getY() %></td>
                   <td><%= record.getR() %></td>
