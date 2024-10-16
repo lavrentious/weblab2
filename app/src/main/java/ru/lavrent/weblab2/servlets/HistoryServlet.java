@@ -5,12 +5,12 @@ import java.util.List;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import ru.lavrent.weblab2.models.RecordBean;
 import ru.lavrent.weblab2.models.Record;
 import java.io.PrintWriter;
@@ -18,15 +18,16 @@ import com.google.gson.Gson;
 
 @WebServlet(urlPatterns = "/history", loadOnStartup = 1)
 public class HistoryServlet extends HttpServlet {
+  @Inject
+  private RecordBean recordBean;
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    RecordBean bean = HistoryServlet.getBean(request);
-    List<Record> history = bean.getRecords();
+    List<Record> history = recordBean.getRecords();
 
     String ifModifiedSinceHeader = request.getHeader("If-Modified-Since");
-    Date lastModifiedDate = getLastModifiedDate(request);
+    Date lastModifiedDate = recordBean.getLastModifiedDate();
     response.setHeader("Last-Modified", new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz").format(lastModifiedDate));
     if (ifModifiedSinceHeader != null) {
       try {
@@ -51,39 +52,7 @@ public class HistoryServlet extends HttpServlet {
   @Override
   protected void doDelete(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    HistoryServlet.getBean(request).clear();
-    setLastModifiedDate(request, new Date());
+    this.recordBean.clear();
     response.setStatus(HttpServletResponse.SC_NO_CONTENT);
-  }
-
-  public static void addRecord(HttpServletRequest request, Record record) {
-    RecordBean recordBean = HistoryServlet.getBean(request);
-    setLastModifiedDate(request, new Date());
-    recordBean.addRecord(record);
-  }
-
-  public static RecordBean getBean(HttpServletRequest request) {
-    HttpSession session = request.getSession();
-    RecordBean bean = (RecordBean) session.getAttribute("recordBean");
-    if (bean == null) {
-      bean = new RecordBean();
-      session.setAttribute("recordBean", bean);
-    }
-    return bean;
-  }
-
-  private static Date getLastModifiedDate(HttpServletRequest request) {
-    HttpSession session = request.getSession();
-    Date lastModified = (Date) session.getAttribute("lastModified");
-    if (lastModified == null) {
-      lastModified = new Date();
-      session.setAttribute("lastModified", lastModified);
-    }
-    return lastModified;
-  }
-
-  private static void setLastModifiedDate(HttpServletRequest request, Date lastModified) {
-    HttpSession session = request.getSession();
-    session.setAttribute("lastModified", lastModified);
   }
 }

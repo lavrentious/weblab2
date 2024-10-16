@@ -1,6 +1,8 @@
 package ru.lavrent.weblab2.models;
 
-public class Record {
+import java.io.Serializable;
+
+public class Record implements Serializable {
   private final long createdAt;
   private final float x;
   private final float y;
