@@ -3,6 +3,7 @@
 <%@ page import="ru.lavrent.weblab2.models.RecordBean" %>
 <%@ page import="com.google.gson.Gson" %>
 <%@ page import="java.util.List" %>
+<jsp:useBean id="recordBean" class="ru.lavrent.weblab2.models.RecordBean" scope="session" />
 <!DOCTYPE html>
 <html>
 
@@ -54,9 +55,6 @@
         </form>
       </div>
 
-
-      <% RecordBean bean = (RecordBean) request.getSession().getAttribute("recordBean"); %>
-
       <div class="p-1 m-1" style="flex-grow: 10">
         <div>
           <h2 style="display: inline; vertical-align: middle">История</h2>
@@ -76,8 +74,8 @@
             </tr>
           </thead>
           <tbody id="historyTableBody">
-            <% if (bean != null && !bean.getRecords().isEmpty()) { %>
-              <% for (Record record : bean.getRecords()) { %>
+            <% if (recordBean != null && !recordBean.getRecords().isEmpty()) { %>
+              <% for (Record record : recordBean.getRecords()) { %>
               <tr>
                   <td><%= record.getCreatedAt() %></td>
                   <td><%= record.getX() %></td>
